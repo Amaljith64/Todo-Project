@@ -5,10 +5,16 @@ from .models import task
 
 # Create your views here.
 
-def home(request):
+def task_view(request):
+    obj1=task.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
         priority = request.POST.get('priority')
         obj = task(name=name, priority=priority)
         obj.save()
-    return render(request, 'home.html')
+    return render(request, 'task_view.html',{'obj1':obj1})
+
+#
+# def Task(request):
+#
+#     return render(request, 'task.html')
