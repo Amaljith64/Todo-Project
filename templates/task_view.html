@@ -35,7 +35,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{i.name}}</h5>
                 <p><b>{{i.priority}}</b></p>
-                <a class="btn btn-danger" href="">Done</a>
+                <a href="{% url 'delete' i.id %}" class="btn btn-danger btn-sm">Delete</a>
             </div>
                  </div>
             <br>

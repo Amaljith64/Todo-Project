@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import task
 
 
@@ -14,7 +14,20 @@ def task_view(request):
         obj.save()
     return render(request, 'task_view.html',{'obj1':obj1})
 
+def delete(request,taskid):
+    Task=task.objects.get(id=taskid)
+    if request.method=='POST':
+        Task.delete()
+        return redirect('/')
+    return render(request,'delete.html',{'task':Task})
+
+
+
+
+
 #
 # def Task(request):
 #
 #     return render(request, '')
+
+
