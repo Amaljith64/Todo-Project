@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
+from .forms import ModeForm
 from .models import task
 
 
@@ -22,6 +24,14 @@ def delete(request,taskid):
         return redirect('/')
     return render(request,'delete.html',{'task':Task})
 
+
+def update(request,taskid):
+    Task=task.objects.get(id=taskid)
+    form=ModeForm(request.POST or None,instance=Task)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
+    return render(request,'edit.html',{'form':form,'task':Task})
 
 
 
