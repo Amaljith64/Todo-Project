@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 from .forms import ModeForm
 from .models import task
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 
 
 # Create your views here.
@@ -17,6 +18,16 @@ class TaskDetailView(DetailView):
     model = task
     template_name = 'details.html'
     context_object_name = 'i'
+
+class TaskUpdateView(UpdateView):
+    model = task
+    template_name = 'update.html'
+    context_object_name = 'task'
+    fields = ('name', 'priority', 'date')
+    def get_success_url(self):
+        return reverse_lazy('cbvdetails',kwargs={'pk':self.object.id})
+
+
 
 def task_view(request):
     obj1=task.objects.all()
