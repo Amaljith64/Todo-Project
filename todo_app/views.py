@@ -3,9 +3,15 @@ from django.shortcuts import render, redirect
 
 from .forms import ModeForm
 from .models import task
+from django.views.generic import ListView
 
 
 # Create your views here.
+
+class TaskListView(ListView):
+    model = task
+    template_name = 'task_view.html'
+    context_object_name = 'obj1'
 
 def task_view(request):
     obj1=task.objects.all()
