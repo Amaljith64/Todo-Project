@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 
 from .forms import ModeForm
 from .models import task
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -26,6 +26,12 @@ class TaskUpdateView(UpdateView):
     fields = ('name', 'priority', 'date')
     def get_success_url(self):
         return reverse_lazy('cbvdetails',kwargs={'pk':self.object.id})
+
+class TaskDeleteView(DeleteView):
+    model = task
+    template_name = 'delete.html'
+    success_url = reverse_lazy('cbvtask')
+
 
 
 
